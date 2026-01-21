@@ -1,10 +1,9 @@
 /*
 Copyright © 2026 NAME HERE <EMAIL ADDRESS>
-
 */
 package main
 
-import "scaffold/cmd"
+import "github.com/tskaushal/scaffold/cmd"
 
 func main() {
 	cmd.Execute()
