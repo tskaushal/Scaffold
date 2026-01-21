@@ -1,61 +1,73 @@
 # Scaffold
+[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/tskaushal/Scaffold)
 
 Scaffold is a Go-based command-line tool that helps you quickly generate a clean, ready-to-use project structure so you can start building immediately without manual setup.
 
-Link to project: https://github.com/tskaushal/scaffold
+This project was built to understand how real scaffolding tools like `create-react-app` or `cobra init` work internally.
 
-alt tag:
-Screenshot showing the scaffold CLI generating a new project from the terminal
+## Features
 
-How It's Made:
+Scaffold provides ready-to-use templates for various types of Go applications:
 
-Tech used: Go, Cobra CLI
+*   **CLI (`cli`):** Generates a command-line application using the [Cobra](https://github.com/spf13/cobra) framework. Includes a basic command structure, Makefile, and `go.mod` file.
+*   **Web (`web`):** Creates a simple web server project with a standard layout for handlers, static assets (CSS, JS), and HTML templates.
+*   **API (`api`):** Scaffolds a REST API structure including handlers, models, and middleware for common tasks like logging and CORS.
 
-Scaffold is built using Go as a developer tooling project. It uses the Cobra CLI library to handle commands, subcommands, and flags, and Go’s filesystem APIs to create directories and generate starter files.
+## Installation
 
-The tool works by taking user input such as the project name and type, then programmatically creating the required folder structure and boilerplate code. The generated project can then be run or extended by the user. This project was built to understand how real scaffolding tools like create-react-app or cobra init work internally.
+Make sure you have Go (version 1.24 or later) installed on your system.
 
-How To Install:
+1.  **Install the CLI:**
+    ```sh
+    go install github.com/tskaushal/scaffold/cmd/scaffold@latest
+    ```
 
-Make sure Go (1.21 or later) is installed on your system.
+2.  **Verify Setup:**
+    Ensure that `$GOPATH/bin` is in your system's `PATH`. You can verify the installation by running:
+    ```sh
+    scaffold --help
+    ```
 
-Install the CLI using Go:
-go install github.com/tskaushal/scaffold/cmd/scaffold@latest
+## Usage
 
-Ensure that `$GOPATH/bin` is added to your PATH.
+Use the `create` command to generate a new project. You can specify the project type using the `--type` (or `-t`) flag. If no type is specified, it defaults to `cli`.
 
-Verify installation:
+```sh
+scaffold create <project-name> --type <project-type>
+```
 
-scaffold --help
+### Examples
 
+**Create a CLI Application:**
+```sh
+scaffold create my-cli-app --type cli
+```
+Or simply (as `cli` is the default):
+```sh
+scaffold create my-cli-app
+```
 
-How To Use:
+**Create a Web Application:**
+```sh
+scaffold create my-webapp --type web
+```
 
-Create a new project:
+**Create a REST API:**
+```sh
+scaffold create my-api --type api
+```
 
+### Running a Generated Project
 
-scaffold create myapp
+After creating a project, navigate into its directory and run it.
 
+For **Web** and **API** projects:
+```sh
+cd <project-name>
+go run ./cmd/main.go
+```
 
-Create a CLI-type project:
-
-
-scaffold create water --type cli
-
-
-Navigate into the generated project and run it:
-
-
-cd myapp
-go run ./cmd
-
-
-Optimizations
-
-(optional)
-
-The project is structured using `cmd/` and `internal/` directories for clean separation of concerns. The CLI is designed so that new templates (web, API, etc.) can be added easily in the future without modifying the core logic.
-
-Lessons Learned:
-
-Building developer tools is very different from building applications. The scaffolding code runs once, while the generated code runs later. I also learned how important correct module naming, Windows PATH handling, and proper project structure are when publishing a real Go CLI that others can install and use.
+For **CLI** projects, you can use the generated Makefile:
+```sh
+cd <project-name>
+make run
