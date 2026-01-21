@@ -1,5 +1,4 @@
 # Scaffold
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/tskaushal/Scaffold)
 
 Scaffold is a Go-based command-line tool that helps you quickly generate a clean, ready-to-use project structure so you can start building immediately without manual setup.
 
